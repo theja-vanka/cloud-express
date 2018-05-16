@@ -29,17 +29,17 @@ app.get('/', (req, res) => {
 
 app.post('/webhook', function(req,res){
 
-	//let params = req.body.result.parameters;
+	let params = req.body.result.parameters;
 	res.setHeader('Content-Type', 'application/json');
 
-  let response = `Awesome is awesome`;
+  //let response = `Awesome is awesome`;
 
-  // if(params.name && params.ether)
-	 // let response = `${params.ether} has been send to ${params.name}`;
-  // else
-  //   let response = `Sorry boy u suck !`;
+  if(params.name && params.ether)
+	 let response = `${params.ether} has been send to ${params.name}`;
+  else
+    let response = `Sorry boy u suck !`;
 	res.send(JSON.stringify({ "speech": response, "displayText": response})); 
-
+  //res.send(response);
 });
 // [END hello_world]
 
