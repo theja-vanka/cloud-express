@@ -31,7 +31,7 @@ app.post('/test', function (req, res) {
 
     res.setHeader('Content-Type', 'application/json');
   
-    response = `Pruthvi kun is awesome`;
+    let response = `Pruthvi kun is awesome`;
     res.send(JSON.stringify({ "speech": response, "displayText": response}));
   });
 // [END hello_world]
