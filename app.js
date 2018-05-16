@@ -34,6 +34,16 @@ app.post('/test', function (req, res) {
     let response = `Pruthvi kun is awesome`;
     res.send(JSON.stringify({ "speech": response, "displayText": response}));
   });
+
+app.post('/name', function(req,res){
+
+	let params = req.body.result.parameters;
+	res.setHeader('Content-Type', 'application/json');
+
+	let response = `${params.givenName} is cool`;
+	res.send(JSON.stringify({ "speech": response, "displayText": response})); 
+
+});
 // [END hello_world]
 
 if (module === require.main) {
