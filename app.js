@@ -24,23 +24,17 @@ app.use(bodyParser.json());
 // [START hello_world]
 // Say hello!
 app.get('/', (req, res) => {
-  res.status(200).send('Hello Pruthvi Kaaps !!');
+  res.status(200).send('Node server is running !!');
 });
 
-app.post('/test', function (req, res) {
-
-    res.setHeader('Content-Type', 'application/json');
-  
-    let response = `Pruthvi kun is awesome`;
-    res.send(JSON.stringify({ "speech": response, "displayText": response}));
-  });
-
-app.post('/name', function(req,res){
+app.post('/webhook', function(req,res){
 
 	let params = req.body.result.parameters;
 	res.setHeader('Content-Type', 'application/json');
-
-	let response = `${params.givenName} is cool`;
+  if(params.name && params.ether)
+	 let response = `${params.ether} has been send to ${params.name}`;
+  else
+    let response = `Sorry boy u suck !`;
 	res.send(JSON.stringify({ "speech": response, "displayText": response})); 
 
 });
