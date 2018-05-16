@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 
 app.post('/webhook', function(req,res){
 
-	let params = req.body.result.parameters;
+	//let params = req.body.result.parameters;
 	res.setHeader('Content-Type', 'application/json');
 
   let response = `Awesome is awesome`;
