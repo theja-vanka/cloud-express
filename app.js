@@ -14,18 +14,26 @@
 'use strict';
 
 const express = require('express');
-
+const bodyParser = require('body-parser');
 const app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(bodyParser.json());
 
 // [START hello_world]
 // Say hello!
 app.get('/', (req, res) => {
-  res.status(200).send('Hello, Pruthvi kun !! Your so black');
+  res.status(200).send('Hello Pruthvi Kaaps !!');
 });
 
-app.get('/himal/', (req,res) => {
- res.status(200).send("Hello himal");
-});
+app.post('/test', function (req, res) {
+
+    res.setHeader('Content-Type', 'application/json');
+  
+    response = `Pruthvi kun is awesome`;
+    res.send(JSON.stringify({ "speech": response, "displayText": response}));
+  });
 // [END hello_world]
 
 if (module === require.main) {
