@@ -31,10 +31,13 @@ app.post('/webhook', function(req,res){
 
 	let params = req.body.result.parameters;
 	res.setHeader('Content-Type', 'application/json');
-  if(params.name && params.ether)
-	 let response = `${params.ether} has been send to ${params.name}`;
-  else
-    let response = `Sorry boy u suck !`;
+
+  let response = `Awesome is awesome`;
+
+  // if(params.name && params.ether)
+	 // let response = `${params.ether} has been send to ${params.name}`;
+  // else
+  //   let response = `Sorry boy u suck !`;
 	res.send(JSON.stringify({ "speech": response, "displayText": response})); 
 
 });
