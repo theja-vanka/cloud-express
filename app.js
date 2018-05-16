@@ -32,12 +32,12 @@ app.post('/webhook', function(req,res){
 	let params = req.body.result.parameters;
 	res.setHeader('Content-Type', 'application/json');
 
-  //let response = `Awesome is awesome`;
+  let response = ``;
 
-  if(params.name && params.ether)
-	 let response = `${params.ether} has been send to ${params.name}`;
+  if(params.personName && params.personEther)
+	  response = `${params.personEther} has been send to ${params.personName}`;
   else
-    let response = `Sorry boy u suck !`;
+    response = `Sorry boy u suck !`;
 	res.send(JSON.stringify({ "speech": response, "displayText": response})); 
   //res.send(response);
 });
