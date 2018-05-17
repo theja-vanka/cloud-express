@@ -54,7 +54,8 @@
   },
   "dependencies": {
     "body-parser": "^1.18.3",
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "web3": "^0.20.2"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "2.2.1",

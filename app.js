@@ -16,6 +16,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const Web3 = require('web3');
+const web3 = new Web3(new Web3.providers.HttpProvider("http://35.200.133.28"));
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -29,19 +32,47 @@ app.get('/', (req, res) => {
 
 app.post('/webhook', function(req,res){
 
+  const accounts = fetch();
 	let params = req.body.result.parameters;
 	res.setHeader('Content-Type', 'application/json');
 
   let response = ``;
 
-  if(params.personName && params.personEther)
+  if(params.personName && params.sendEther)
 	  response = `${params.personEther} has been send to ${params.personName}`;
+  else if(params.voteCount)
+    response = `function for votecount`
+  else if(params.voteLead)
+    response = `function for votelead`
+  else if(params.etherBalance) 
+    response = `function for balance`
   else
-    response = `Sorry boy u suck !`;
+    response = `Sorry cannot process your request`;
 	res.send(JSON.stringify({ "speech": response, "displayText": response})); 
-  //res.send(response);
+
+
+  //console.log(accounts);
+  //res.send(accounts);
 });
 // [END hello_world]
+
+function fetch() {
+  const accounts = web3.eth.accounts;
+    const assign = [{
+        'krishna': accounts[0],
+        'pruthvi': accounts[1],
+        'pankaja': accounts[2],
+        'shashikumar' : accounts[3],
+        'suresh': accounts[4],
+        'raghavendra': accounts[5],
+        'ganesh': accounts[6],
+        'vaishakh': accounts[7],
+        'rajath': accounts[8],
+        'gambler': accounts[9]
+    }]
+    return(assign); 
+}
+
 
 if (module === require.main) {
   // [START server]
