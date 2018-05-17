@@ -53,7 +53,7 @@ app.post('/webhook', function(req,res){
   if(params.personName && params.sendEther)
   {
 
-    let send = web3.eth.sendTransaction({from:wallet['krishna'],to:wallet[params.personName], value:web3.toWei(parseInt(params.ether), "ether")});
+    let send = web3.eth.sendTransaction({from:wallet['krishna'],to:wallet[params.personName], value:web3.toWei(parseInt(params.sendEther), "ether")});
 	  response = `${params.sendEther} has been send to ${params.personName}`;
 
   }
