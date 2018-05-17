@@ -51,13 +51,15 @@ app.post('/webhook', function(req,res){
   let response = ``;
 
   if(params.personName && params.sendEther)
-	  response = `${params.personEther} has been send to ${params.personName}`;
+	  response = `${params.sendEther} has been send to ${params.personName}`;
   else if(params.voteCount)
-    response = `function for votecount`
+    response = `${params.voteCount} has ${contractInstance.totalVotesFor.call(params.voteCount)} votes`
   else if(params.voteLead)
+  {
     response = `function for votelead`
+  }
   else if(params.etherBalance) 
-    response = `function for balance`
+    response = `You have ${web3.fromWei(web3.eth.getBalance(accounts[0]), 'ether')}`
   else
     response = `Sorry cannot process your request`;
 	res.send(JSON.stringify({ "speech": response, "displayText": response})); 
@@ -67,6 +69,28 @@ app.post('/webhook', function(req,res){
   //res.send(accounts);
 });
 // [END hello_world]
+
+function chickenWinner() {
+    let congress = parseInt(contractInstance.totalVotesFor.call('Congress'));
+    let bjp = parseInt(contractInstance.totalVotesFor.call('BJP'));
+    let jds = parseInt(contractInstance.totalVotesFor.call('JDS'));
+    let votemap = {
+      congress : congress,
+      bjp : bjp,
+      jds : jds
+    }
+    let max = Math.max(congress,bjp,jds);
+    let winner = votemap.getKeyByValue(max);
+}
+
+function getKeyByValue(value) {
+    for( var prop in this ) {
+        if( this.hasOwnProperty( prop ) ) {
+             if( this[ prop ] === value )
+                 return prop;
+        }
+    }
+}
 
 function fetch() {
   const accounts = web3.eth.accounts;
