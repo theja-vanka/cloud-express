@@ -17,7 +17,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const Web3 = require('web3');
-const web3 = new Web3(new Web3.pwebroviders.HttpProvider("http://35.200.133.28"));
+const web3 = new Web3(new Web3.providers.HttpProvider("http://35.200.133.28"));
 const solc = require('solc');
 const fs = require('fs');
 
@@ -53,7 +53,7 @@ app.post('/webhook', function(req,res){
   if(params.personName && params.sendEther)
   {
 
-    let send = web3.eth.sendTransaction({from:wallet['krishna'],to:wallet[params.personName], value:web3.toWei(params.ether, "ether")});
+    let send = web3.eth.sendTransaction({from:wallet['krishna'],to:wallet[params.personName], value:web3.toWei(parseInt(params.ether), "ether")});
 	  response = `${params.sendEther} has been send to ${params.personName}`;
 
   }
