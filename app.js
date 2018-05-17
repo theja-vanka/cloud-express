@@ -86,15 +86,21 @@ function chickenWinner() {
       jds : jds
     }
     let max = Math.max(congress,bjp,jds);
-    for(i in votemap)
-    {
-      if(votemap[i] == max)
-      {
-        return(i);
-      }
-    }
+    let key = findkey(votemap,max);
+    return(key);
 }
 
+function findkey(obj, value) {
+    var key = null;
+    for (var prop in obj) {
+        if (obj.hasOwnProperty(prop)) {
+            if (obj[prop] === value) {
+                key = prop;
+            }
+        }
+    }
+    return key;
+}
 
 
 function fetch() {
