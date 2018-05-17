@@ -53,13 +53,14 @@ app.post('/webhook', function(req,res){
   if(params.personName && params.sendEther)
 	  response = `${params.sendEther} has been send to ${params.personName}`;
   else if(params.voteCount)
-    response = `${params.voteCount} has ${contractInstance.totalVotesFor.call(params.voteCount)} votes`
+    response = `${params.voteCount} has ${contractInstance.totalVotesFor.call(params.voteCount)} votes`;
   else if(params.voteLead)
   {
-    response = `function for votelead`
+    let winner = chickenWinner();
+    response = `${winner} is leading`;
   }
   else if(params.etherBalance) 
-    response = `You have ${web3.fromWei(web3.eth.getBalance(accounts[0]), 'ether')}`
+    response = `You have ${web3.fromWei(web3.eth.getBalance(accounts[0]), 'ether')}`;
   else
     response = `Sorry cannot process your request`;
 	res.send(JSON.stringify({ "speech": response, "displayText": response})); 
@@ -80,17 +81,16 @@ function chickenWinner() {
       jds : jds
     }
     let max = Math.max(congress,bjp,jds);
-    let winner = votemap.getKeyByValue(max);
-}
-
-function getKeyByValue(value) {
-    for( var prop in this ) {
-        if( this.hasOwnProperty( prop ) ) {
-             if( this[ prop ] === value )
-                 return prop;
-        }
+    for(i in votemap)
+    {
+      if(i == max)
+      {
+        return(i);
+      }
     }
 }
+
+
 
 function fetch() {
   const accounts = web3.eth.accounts;
