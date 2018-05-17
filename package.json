@@ -55,6 +55,8 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.2",
+    "fs": "0.0.1-security",
+    "solc": "^0.4.24",
     "web3": "^0.20.2"
   },
   "devDependencies": {

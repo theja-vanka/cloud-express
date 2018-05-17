@@ -18,6 +18,18 @@ const bodyParser = require('body-parser');
 const app = express();
 const Web3 = require('web3');
 const web3 = new Web3(new Web3.providers.HttpProvider("http://35.200.133.28"));
+const solc = require('solc');
+const fs = require('fs');
+
+const code = fs.readFileSync('Voting.sol').toString();
+const compiledCode = solc.compile(code);
+
+const mycontract = JSON.parse(compiledCode.contracts[':Voting'].interface);
+const VotingContract = web3.eth.contract(mycontract);
+const byteCode = compiledCode.contracts[':Voting'].bytecode;
+
+const contractInstance = VotingContract.at('0x08141010f35e4905647d136de2c3ee7a662803f9');
+
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -32,7 +44,7 @@ app.get('/', (req, res) => {
 
 app.post('/webhook', function(req,res){
 
-  const accounts = fetch();
+  let accounts = fetch();
 	let params = req.body.result.parameters;
 	res.setHeader('Content-Type', 'application/json');
 
