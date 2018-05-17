@@ -60,7 +60,7 @@ app.post('/webhook', function(req,res){
     response = `${winner} is leading`;
   }
   else if(params.etherBalance) 
-    response = `You have ${web3.fromWei(web3.eth.getBalance(accounts[0]), 'ether')}`;
+    response = `You have ${web3.fromWei(web3.eth.getBalance(web3.eth.accounts[0]), 'ether')}`;
   else
     response = `Sorry cannot process your request`;
 	res.send(JSON.stringify({ "speech": response, "displayText": response})); 
@@ -83,7 +83,7 @@ function chickenWinner() {
     let max = Math.max(congress,bjp,jds);
     for(i in votemap)
     {
-      if(i == max)
+      if(votemap[i] == max)
       {
         return(i);
       }
