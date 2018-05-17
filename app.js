@@ -17,7 +17,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const Web3 = require('web3');
-const web3 = new Web3(new Web3.providers.HttpProvider("http://35.200.133.28"));
+const web3 = new Web3(new Web3.pwebroviders.HttpProvider("http://35.200.133.28"));
 const solc = require('solc');
 const fs = require('fs');
 
@@ -44,14 +44,19 @@ app.get('/', (req, res) => {
 
 app.post('/webhook', function(req,res){
 
-  let accounts = fetch();
+  let wallet = fetch();
 	let params = req.body.result.parameters;
 	res.setHeader('Content-Type', 'application/json');
 
   let response = ``;
 
   if(params.personName && params.sendEther)
+  {
+
+    let send = web3.eth.sendTransaction({from:wallet['krishna'],to:wallet[params.personName], value:web3.toWei(params.ether, "ether")});
 	  response = `${params.sendEther} has been send to ${params.personName}`;
+
+  }
   else if(params.voteCount)
     response = `${params.voteCount} has ${contractInstance.totalVotesFor.call(params.voteCount)} votes`;
   else if(params.voteLead)
@@ -94,7 +99,7 @@ function chickenWinner() {
 
 function fetch() {
   const accounts = web3.eth.accounts;
-    const assign = [{
+    const assign = {
         'krishna': accounts[0],
         'pruthvi': accounts[1],
         'pankaja': accounts[2],
@@ -105,7 +110,7 @@ function fetch() {
         'vaishakh': accounts[7],
         'rajath': accounts[8],
         'gambler': accounts[9]
-    }]
+    }
     return(assign); 
 }
 
