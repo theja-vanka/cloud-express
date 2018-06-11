@@ -28,7 +28,7 @@ const mycontract = JSON.parse(compiledCode.contracts[':Voting'].interface);
 const VotingContract = web3.eth.contract(mycontract);
 const byteCode = compiledCode.contracts[':Voting'].bytecode;
 
-const contractInstance = VotingContract.at('0x08141010f35e4905647d136de2c3ee7a662803f9');
+const contractInstance = VotingContract.at('0xb32e1d3a850fc6b2feb5a62a7bf3a46dd159551c');
 
 
 
